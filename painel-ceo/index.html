@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>Painel CEO | Nobre Digital</title>
+<style>
+:root{--bg:#080808;--panel:#121212;--panel2:#191919;--gold:#d6b35d;--gold2:#f0d58b;--text:#f5f1e7;--muted:#aaa397;--line:#302a1d;--blue:#69a9e8;--red:#ef7777;--yellow:#e5c46d;--green:#7dc99a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#211b0e 0,#080808 42%);color:var(--text);font:15px system-ui,-apple-system,Segoe UI,sans-serif}header{padding:26px max(18px,calc((100% - 1180px)/2));border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap} .brand{font-weight:900;letter-spacing:2px}.brand span{color:var(--gold)}.sub{color:var(--muted);font-size:12px;letter-spacing:2px;margin-top:4px}.wrap{max-width:1180px;margin:auto;padding:24px 18px 60px}h1{font-size:clamp(25px,4vw,36px);margin:4px 0 8px}.lead{color:var(--muted);margin:0 0 22px}.notice{border:1px solid #6a5526;background:#241d0e;color:#e9d8ad;border-radius:12px;padding:12px 14px;font-size:13px;margin-bottom:20px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0 24px}.stat,.card{background:linear-gradient(145deg,#171717,#101010);border:1px solid var(--line);border-radius:15px;padding:17px}.stat small{color:var(--muted);display:block;margin-bottom:8px}.stat strong{font-size:25px;color:var(--gold2)}.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:18px 0}.btn{border:1px solid var(--gold);background:var(--gold);color:#17120a;border-radius:9px;padding:11px 15px;font-weight:800;cursor:pointer}.btn.secondary{background:transparent;color:var(--gold2)}.btn.danger{border-color:#713838;color:#ffaaaa;background:transparent}.tabs{display:flex;gap:8px;flex-wrap:wrap}.tab{background:#171717;color:var(--muted);border:1px solid var(--line);padding:9px 13px;border-radius:9px;cursor:pointer}.tab.active{color:var(--gold2);border-color:var(--gold)}.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}.card h2{font-size:18px;margin:0 0 14px}.fieldgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}label{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}input,select,textarea{width:100%;background:#090909;color:var(--text);border:1px solid #403a2e;border-radius:8px;padding:11px;font:inherit}textarea{min-height:78px;resize:vertical}.full{grid-column:1/-1}.list{display:grid;gap:10px}.item{border:1px solid var(--line);border-radius:12px;padding:14px;background:#101010}.itemtop{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.item strong{color:var(--gold2)}.meta{font-size:13px;color:var(--muted);margin-top:7px}.pill{font-size:11px;border-radius:30px;padding:4px 8px;background:#272319;color:var(--yellow)}.pill.done{color:var(--green);background:#14251b}.pill.late{color:var(--red);background:#2a1717}.actions{display:flex;gap:7px;margin-top:11px;flex-wrap:wrap}.actions button{font-size:12px;padding:7px 9px}.empty{color:var(--muted);padding:18px;text-align:center;border:1px dashed var(--line);border-radius:10px}.hidden{display:none!important}.foot{color:#817b70;font-size:12px;text-align:center;margin-top:28px}
+@media(max-width:760px){.stats{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}}@media(max-width:430px){.fieldgrid{grid-template-columns:1fr}.full{grid-column:auto}.stat strong{font-size:21px}}
+</style>
+</head>
+<body>
+<header><div><div class="brand">NOBRE <span>DIGITAL</span></div><div class="sub">PAINEL CEO · GESTÃO DE PROJETOS</div></div><button class="btn secondary" id="backupBtn">Exportar cópia de segurança</button></header>
+<main class="wrap">
+<h1>Centro de controlo</h1><p class="lead">Clientes, propostas, projetos, prazos e resultados num só lugar.</p>
+<div class="notice">Privacidade: os registos ficam apenas neste navegador/dispositivo (armazenamento local). Não existe sincronização nem proteção por palavra-passe. Não guardes aqui palavras-passe, dados bancários ou documentos sensíveis. Exporta cópias de segurança regularmente.</div>
+<section class="stats">
+<div class="stat"><small>Clientes registados</small><strong id="sClients">0</strong></div>
+<div class="stat"><small>Projetos em curso</small><strong id="sActive">0</strong></div>
+<div class="stat"><small>Valor contratado</small><strong id="sValue">0,00 €</strong></div>
+<div class="stat"><small>Por receber</small><strong id="sDue">0,00 €</strong></div>
+</section>
+<div class="toolbar"><div class="tabs"><button class="tab active" data-filter="todos">Todos</button><button class="tab" data-filter="contacto">Contactos</button><button class="tab" data-filter="orcamento">Orçamentos</button><button class="tab" data-filter="curso">Em curso</button><button class="tab" data-filter="concluido">Concluídos</button></div><button class="btn" id="newBtn">+ Novo projeto</button></div>
+<div class="grid">
+<section class="card" id="formCard"><h2 id="formTitle">Registar cliente / projeto</h2>
+<form id="projectForm"><input type="hidden" id="editId">
+<div class="fieldgrid">
+<div><label for="client">Nome do negócio / cliente *</label><input id="client" required maxlength="100" placeholder="Ex.: Barbearia Central"></div>
+<div><label for="person">Pessoa de contacto</label><input id="person" maxlength="100" placeholder="Nome do responsável"></div>
+<div><label for="phone">Telefone</label><input id="phone" maxlength="30" placeholder="Contacto comercial"></div>
+<div><label for="email">Email</label><input id="email" type="email" maxlength="120" placeholder="email@exemplo.pt"></div>
+<div><label for="service">Serviço</label><select id="service"><option>Website profissional</option><option>Aplicação / sistema de gestão</option><option>Manutenção</option><option>Outro</option></select></div>
+<div><label for="status">Estado</label><select id="status"><option value="contacto">Novo contacto</option><option value="orcamento">Orçamento enviado</option><option value="curso">Em desenvolvimento</option><option value="concluido">Concluído</option><option value="pausado">Pausado</option></select></div>
+<div><label for="price">Valor acordado (€)</label><input id="price" type="number" min="0" step=".01" value="0"></div>
+<div><label for="paid">Valor recebido (€)</label><input id="paid" type="number" min="0" step=".01" value="0"></div>
+<div><label for="deadline">Prazo / data prevista</label><input id="deadline" type="date"></div>
+<div><label for="next">Próxima ação</label><input id="next" maxlength="120" placeholder="Ex.: pedir logótipo"></div>
+<div class="full"><label for="notes">Notas do projeto</label><textarea id="notes" maxlength="1500" placeholder="Funcionalidades, acordos e tarefas..."></textarea></div>
+</div><div class="toolbar"><button class="btn" type="submit">Guardar projeto</button><button class="btn secondary" type="button" id="cancelBtn">Limpar</button></div>
+</form></section>
+<section class="card"><h2>Carteira de projetos</h2><input id="search" placeholder="Pesquisar cliente ou serviço..." style="margin-bottom:12px"><div id="projectList" class="list"><div class="empty">Ainda não existem projetos. Regista o primeiro.</div></div></section>
+</div>
+<p class="foot">NOBRE DIGITAL · TRANSFORMAMOS IDEIAS EM RESULTADOS</p>
+</main>
+<script>
+(()=>{'use strict';
+const KEY='nobreDigitalCEO_v1';let records=[];let filter='todos';
+const $=id=>document.getElementById(id);const euro=n=>(Number(n)||0).toLocaleString('pt-PT',{style:'currency',currency:'EUR'});
+const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function load(){try{const v=JSON.parse(localStorage.getItem(KEY)||'[]');records=Array.isArray(v)?v:[]}catch{records=[]}}
+function persist(){localStorage.setItem(KEY,JSON.stringify(records));render()}
+function reset(){ $('projectForm').reset();$('editId').value='';$('price').value='0';$('paid').value='0';$('formTitle').textContent='Registar cliente / projeto'}
+function render(){
+$('sClients').textContent=new Set(records.map(r=>r.client.toLowerCase())).size;
+$('sActive').textContent=records.filter(r=>r.status==='curso').length;
+$('sValue').textContent=euro(records.reduce((a,r)=>a+(+r.price||0),0));
+$('sDue').textContent=euro(records.reduce((a,r)=>a+Math.max(0,(+r.price||0)-(+r.paid||0)),0));
+const q=$('search').value.toLowerCase();
+const rows=records.filter(r=>(filter==='todos'||r.status===filter)&&[r.client,r.person,r.service,r.next].join(' ').toLowerCase().includes(q)).sort((a,b)=>(b.updated||'').localeCompare(a.updated||''));
+$('projectList').innerHTML=rows.length?rows.map(r=>{const due=Math.max(0,(+r.price||0)-(+r.paid||0));const status={contacto:'Novo contacto',orcamento:'Orçamento enviado',curso:'Em desenvolvimento',concluido:'Concluído',pausado:'Pausado'}[r.status]||r.status;return '<article class="item"><div class="itemtop"><strong>'+safe(r.client)+'</strong><span class="pill '+(r.status==='concluido'?'done':r.status==='pausado'?'late':'')+'">'+status+'</span></div><div class="meta">'+safe(r.service)+' · '+euro(r.price)+' acordados · '+euro(r.paid)+' recebidos · '+euro(due)+' em falta</div><div class="meta">'+(r.deadline?'Prazo: '+safe(r.deadline)+' · ':'')+(r.next?'Próxima ação: '+safe(r.next):'Sem próxima ação definida')+'</div>'+(r.notes?'<div class="meta">'+safe(r.notes)+'</div>':'')+'<div class="actions"><button class="btn secondary" data-edit="'+r.id+'">Editar</button><button class="btn danger" data-delete="'+r.id+'">Apagar</button></div></article>'}).join(''):'<div class="empty">Não foram encontrados registos.</div>';
+}
+$('projectForm').addEventListener('submit',e=>{e.preventDefault();const id=$('editId').value||String(Date.now());const old=records.find(r=>r.id===id);const item={id,client:$('client').value.trim(),person:$('person').value.trim(),phone:$('phone').value.trim(),email:$('email').value.trim(),service:$('service').value,status:$('status').value,price:Math.max(0,+$('price').value||0),paid:Math.max(0,+$('paid').value||0),deadline:$('deadline').value,next:$('next').value.trim(),notes:$('notes').value.trim(),updated:new Date().toISOString()};if(item.paid>item.price&&item.price>0){if(!confirm('O valor recebido é superior ao valor acordado. Queres guardar assim?'))return}if(old)records=records.map(r=>r.id===id?item:r);else records.push(item);persist();reset()});
+$('projectList').addEventListener('click',e=>{const edit=e.target.dataset.edit,del=e.target.dataset.delete;if(edit){const r=records.find(x=>x.id===edit);if(!r)return;$('editId').value=r.id;for(const k of ['client','person','phone','email','service','status','price','paid','deadline','next','notes'])$(k).value=r[k]??'';$('formTitle').textContent='Editar projeto';$('formCard').scrollIntoView({behavior:'smooth'})}if(del&&confirm('Apagar este registo? Esta ação não pode ser anulada.')){records=records.filter(r=>r.id!==del);persist()}});
+$('cancelBtn').onclick=reset;$('newBtn').onclick=()=>{reset();$('formCard').scrollIntoView({behavior:'smooth'})};$('search').oninput=render;
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));render()});
+$('backupBtn').onclick=()=>{const blob=new Blob([JSON.stringify(records,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='nobre-digital-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(a.href)};
+load();render();
+})();
+</script>
+</body></html>
