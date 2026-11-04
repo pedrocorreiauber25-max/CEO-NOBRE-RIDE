@@ -1,0 +1,12 @@
+{
+  "name": "Plano Certo — Finanças Familiares",
+  "short_name": "Plano Certo",
+  "description": "Assistente de contas, vencimentos e plano semanal familiar.",
+  "lang": "pt-PT",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f7fc",
+  "theme_color": "#eef4ff",
+  "icons": [{"src":"./icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
