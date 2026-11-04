@@ -100,7 +100,7 @@ const addPeriod=(date,f)=>{let d=new Date(date+'T12:00:00');if(f==='weekly')d.se
 const freqLabel=f=>({once:'Único',weekly:'Semanal',monthly:'Mensal',quarterly:'Trimestral',yearly:'Anual'}[f]||f);
 const perWeek=(v,f)=>v*({once:0,weekly:1,monthly:12/52,quarterly:4/52,yearly:1/52}[f]||0);
 const debtBalance=a=>Math.max(0,Number(a.balance||0));
-function calc(){let bills=0,debtPlan=0,debt=0;state.accounts.forEach(a=>{if(a.kind==='debt'){let bal=debtBalance(a);debt+=bal;let min=perWeek(Number(a.amount||0),a.frequency);let payoff=bal/156;debtPlan+=Math.max(min,payoff)}else if(a.frequency!=='once'){bills+=perWeek(Number(a.amount||0),a.frequency)} });return{bills,debtPlan,debt,total:bills+debtPlan+Number(state.groceries||200)}}
+function calc(){let bills=0,debtPlan=0,debt=0;state.accounts.forEach(a=>{if(a.kind==='debt'){let bal=debtBalance(a);debt+=bal;let min=perWeek(Number(a.amount||0),a.frequency);let payoff=bal/156;debtPlan+=Math.max(min,payoff)}else if(a.frequency==='once'){const weeks=Math.max(1,Math.ceil(Math.max(0,days(today(),a.due))/7));bills+=Number(a.amount||0)/weeks}else{bills+=perWeek(Number(a.amount||0),a.frequency)} });return{bills,debtPlan,debt,total:bills+debtPlan+Number(state.groceries||200)}}
 function dateStatus(d){let diff=days(today(),d);if(diff<0)return{label:'Atrasado',cls:'red'};if(diff===0)return{label:'Hoje',cls:'orange'};if(diff<=3)return{label:'A vencer',cls:'orange'};return{label:'Agendado',cls:''}}
 function nextDue(a){return a.due}
 function dueRows(){return state.accounts.filter(a=>a.due).sort((a,b)=>a.due.localeCompare(b.due))}
